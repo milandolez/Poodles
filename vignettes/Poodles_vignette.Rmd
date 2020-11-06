@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Poodles is composed of 3 functions that clean the data, make a data frame of just poodles, and find poodles as a percent of total dogs in each zip code. 
+Poodles is composed of 3 functions that clean the data, make a data frame of just poodles, and find poodles as a percent of total dogs in each zip code. (Note: the ***plyr package*** must be installed for one of the three functions)
 
 ```{r setup}
 library(Poodles)
@@ -57,7 +57,7 @@ head(make_poodle_frame(clean_dog(dog_data)))
 
 ## Third Function: make_poodle_percent
 
-This function uses the outputs from both the first and second function and constructs poodles as a percentage of the total dogs in each zip code. The zip codes are sorted in order of decreasing percentage so that the first row has the highest poodle percent.
+This function uses the outputs from both the first and second function and constructs poodles as a percentage of the total dogs in each zip code. The zip codes are sorted in order of decreasing percentage so that the first row has the highest poodle percent. This function uses count function from the ***plyr package***, and therefore it must be installed before using this function.
 
 ```{r}
 head(make_poodle_percent(clean_dog(dog_data), make_poodle_frame(clean_dog(dog_data))))
