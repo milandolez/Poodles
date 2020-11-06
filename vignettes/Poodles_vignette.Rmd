@@ -1,0 +1,64 @@
+---
+title: "Poodles_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Poodles_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Poodles is composed of 3 functions that clean the data, make a data frame of just poodles, and find poodles as a percent of total dogs in each zip code. 
+
+```{r setup}
+library(Poodles)
+```
+
+## Order of Functions
+
+The first function, ***clean_dog***, should be used before any of the other functions. Both the ***make_poodle_frame*** function and ***make_poodle_percent*** function use the clean data generated from clean_dog as an input. The ***make_poodle_percent*** function also uses the output from the ***make_poodle_percent*** function in addition to the output from the ***clean_dog*** function, and therefore the ***make_poodle_percent*** should be used last in relation to the other two functions.
+
+| Order  | Function | 
+|------:|:-----|
+|   1 |  clean_dog  |
+|  2 |  make_poodle_frame |   
+|    3 |  make_poodle_percent |  
+
+## Loading Data
+
+This package uses data from dog licenses. Data sets that include ***LicenseType, Breed, Color, DogName, OwnerZip, and ValidDate*** columns can be used with this package. The example data set in this package is from Allegeny county, Pennsylvania and downloaded from Data.gov. (Note: I'll use the "head" function throughout this vignette to fit the outputs, but actual application of this package does not need a "head" function)
+
+```{r}
+load("dog_data.RData")
+head(dog_data)
+```
+
+## First Function: clean_dog
+
+This function removes the ExpYear column, separates out just the sex from the LicenseType column, and separates out just the date from the ValidDate column. "Lifetime" is the deliminator for the LicenseType column and "T" is the deliminator for the ValidData column. Therefore, any input data must contain these deliminators in order for this function to clean the data. 
+
+```{r}
+head(clean_dog(dog_data))
+```
+
+## Second Function: make_poodle_frame
+
+This function takes the output of the ***clean_dog*** function and makes a data frame with just the poodles. The function replaces the Breed column from the cleaned data with a poodle type column. 
+
+```{r}
+head(make_poodle_frame(clean_dog(dog_data)))
+```
+
+## Third Function: make_poodle_percent
+
+This function uses the outputs from both the first and second function and constructs poodles as a percentage of the total dogs in each zip code. The zip codes are sorted in order of decreasing percentage so that the first row has the highest poodle percent.
+
+```{r}
+head(make_poodle_percent(clean_dog(dog_data), make_poodle_frame(clean_dog(dog_data))))
+```

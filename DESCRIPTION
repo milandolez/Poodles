@@ -1,0 +1,23 @@
+Package: Poodles
+Title: three functions which help Izzy find friends
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Milan",
+           family = "Dolezal",
+           role = c("aut", "cre"),
+           email = "mmd153@georgetown.edu",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: The package cleans data from country dog registration, makes a data frame of just the poodles, and finds poodles as a percent of total dogs in each zip code
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests:
+	knitr,
+	rmarkdown,
+	plyr
+VignetteBuilder: knitr
+Depends: 
+	R (>= 2.10)
